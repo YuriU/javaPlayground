@@ -8,6 +8,7 @@ import Service.TestDao;
 import Service.TestDaoImpl;
 import Test.TestRunner;
 import com.google.inject.AbstractModule;
+import Service.ConnectionPool;
 import com.google.inject.Singleton;
 
 public class TestModule extends AbstractModule {
@@ -19,6 +20,7 @@ public class TestModule extends AbstractModule {
         bind(Service.class).to(ServiceImpl.class).in(OperationScoped.class);
         bind(TestDao.class).to(TestDaoImpl.class).in(OperationScoped.class);
         bind(TestRunner.class).in(Singleton.class);
+        bind(ConnectionPool.class).in(Singleton.class);
     }
 
 

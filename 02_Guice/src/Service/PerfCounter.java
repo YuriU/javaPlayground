@@ -13,6 +13,6 @@ public class PerfCounter {
     public void measureDao() {
         System.out.printf("   PerfCounter.Start >>> %s \r\n", uuid.toString().replace("-","").substring(0,8));
         dao.DoDaoLogic();
-        System.out.printf("   PerfCounter.End >>> %s \r\n", uuid.toString().replace("-","").substring(0,8));
+        //System.out.printf("   PerfCounter.End >>> %s \r\n", uuid.toString().replace("-","").substring(0,8));
     }
 }
