@@ -26,6 +26,7 @@ public class _Stream {
         boolean containsOnlyFemales = people.stream()
                 //.filter(p -> Gender.FEMALE.equals(p.gender))
                 .allMatch(person -> Gender.FEMALE.equals(person.gender));
+
         System.out.println(containsOnlyFemales);
 
 
