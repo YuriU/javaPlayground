@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class HiByeService {
 
-    public void sayHi() {
-        System.out.println("Hi");
+    public void sayHi(String name) {
+        System.out.println("Hi " + name);
     }
 
     public void sayBye() {
