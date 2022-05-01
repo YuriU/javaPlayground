@@ -22,5 +22,16 @@ public class SomeCDIBusiness {
         this.someCDIDao = someCDIDao;
     }
 
+    public int findGreatest() {
+        int greatest = Integer.MIN_VALUE;
+        int[] data = someCDIDao.getData();
+        for (int value: data) {
+            if(value > greatest) {
+                greatest = value;
+            }
+        }
+        return greatest;
+    }
+
 
 }
