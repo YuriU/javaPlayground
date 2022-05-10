@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://in28minutes.com/courses"
+		xmlns:tns="http://in28minutes.com/courses" elementFormDefault="qualified">
+
+	<element name="GetCourseDetailsRequest">
+		<complexType>
+			<sequence>
+				<element name= "id" type="int"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="GetCourseDetailsResponse">
+		<complexType>
+			<sequence>
+				<element name= "CourseDetails" type="tns:CourseDetails"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<complexType name="CourseDetails">
+		<sequence>
+			<element name="id" type="int"/>
+			<element name="name" type="string"/>
+			<element name="description" type="string"/>
+		</sequence>
+	</complexType>
+
+	<element name="GetAllCourseDetailsRequest">
+        <complexType>
+		</complexType>
+	</element>
+
+	<element name="GetAllCourseDetailsResponse">
+		<complexType>
+			<sequence>
+				<element name= "CourseDetails" type="tns:CourseDetails" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="DeleteCourseDetailsRequest">
+		<complexType>
+			<sequence>
+				<element name="id" type="int"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="DeleteCourseDetailsResponse">
+		<complexType>
+			<sequence>
+				<element name="status" type="tns:Status"></element>
+			</sequence>
+		</complexType>
+	</element>
+	
+	<simpleType name="Status">
+		<restriction base="string">
+			<enumeration value="SUCCESS" />
+			<enumeration value="FAILURE" />
+		</restriction>
+	</simpleType>
+
+</schema>
+
+		<!--
+        <GetCourseDetailsRequest xmlns="http://in28minutes.com/courses">
+            <id>123</id>
+        </GetCourseDetailsRequest>
+         -->
