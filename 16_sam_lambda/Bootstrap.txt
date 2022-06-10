@@ -1,0 +1,9 @@
+mvn archetype:generate \
+-DarchetypeGroupId=software.amazon.awssdk \
+-DarchetypeArtifactId=archetype-lambda \
+-DarchetypeVersion=2.15.79 \
+-Dservice=dynamodb
+
+
+From here:
+https://aws.amazon.com/ru/blogs/developer/bootstrapping-a-java-lambda-application-with-minimal-aws-java-sdk-startup-time-using-maven/
