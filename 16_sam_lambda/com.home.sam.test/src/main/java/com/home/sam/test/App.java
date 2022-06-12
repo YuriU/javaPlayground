@@ -2,6 +2,7 @@ package com.home.sam.test;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
 /**
@@ -11,12 +12,12 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
  * @see <a href=https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html>Lambda Java Handler</a> for more information
  */
 public class App implements RequestHandler<Object, Object> {
-    private final DynamoDbClient dynamoDbClient;
+    private final DynamoDbEnhancedClient dynamoDbClient;
 
     public App() {
         // Initialize the SDK client outside of the handler method so that it can be reused for subsequent invocations.
         // It is initialized when the class is loaded.
-        dynamoDbClient = DependencyFactory.dynamoDbClient();
+        dynamoDbClient = DependencyFactory.dynamoDbEnhancedClient();
         // Consider invoking a simple api here to pre-warm up the application, eg: dynamodb#listTables
     }
 

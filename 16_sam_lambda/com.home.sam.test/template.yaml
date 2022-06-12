@@ -43,3 +43,27 @@ Resources:
       StageName: !Ref Stage
       Variables:
         LAMBDA_ALIAS: !Ref Stage
+
+  GetItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: java8
+      Handler: com.home.sam.test.GetItemFunction::handleRequest
+      Timeout: 20
+      MemorySize: 512
+      CodeUri: .
+      AutoPublishAlias: !Ref Stage
+      Environment:
+        Variables:
+          TABLE: !Ref BooksTable
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref BooksTable
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /books/{isbn}
+            Method: get
+            RestApiId:
+              Ref: BooksApi
