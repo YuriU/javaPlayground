@@ -20,7 +20,7 @@ Resources:
       Handler: com.home.sam.test.App::handleRequest
       Timeout: 60
       MemorySize: 512
-      CodeUri: ./target/com.home.sam.test.jar
+      CodeUri: .
       # Attach policies here to give the function permission to access other AWS resources if needed
       # See: https://github.com/awslabs/serverless-application-model/blob/master/docs/policy_templates.rst
       # eg:
@@ -64,6 +64,76 @@ Resources:
           Type: Api
           Properties:
             Path: /books/{isbn}
+            Method: get
+            RestApiId:
+              Ref: BooksApi
+
+  PutItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: java8
+      Handler: com.home.sam.test.PutItemFunction::handleRequest
+      Timeout: 20
+      MemorySize: 512
+      CodeUri: .
+      AutoPublishAlias: !Ref Stage
+      Environment:
+        Variables:
+          TABLE: !Ref BooksTable
+      Policies:
+        - DynamoDBWritePolicy:
+            TableName: !Ref BooksTable
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /books
+            Method: post
+            RestApiId:
+              Ref: BooksApi
+
+  GetItemFunctionPython:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.8
+      Handler: index.handler
+      Timeout: 10
+      MemorySize: 128
+      AutoPublishAlias: !Ref Stage
+      Environment:
+        Variables:
+          TABLE: !Ref BooksTable
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref BooksTable
+      InlineCode: |
+        import json
+        import boto3
+        import os
+
+        dynamodb = boto3.resource('dynamodb')
+
+
+        def handler(event, context):
+            table = dynamodb.Table(os.environ['TABLE'])
+            response = ''
+            book_key = event['pathParameters']['isbn']
+            if book_key:
+              try:
+                book = table.get_item(Key={'isbn': book_key})
+              except ClientError as e:
+                print(e.response['Error']['Message'])
+              else:
+                response = json.dumps(book['Item'])
+            return {
+                'statusCode': 200,
+                'body': response
+            }
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /books/python/{isbn}
             Method: get
             RestApiId:
               Ref: BooksApi
