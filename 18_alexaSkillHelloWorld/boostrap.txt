@@ -1,0 +1,1 @@
+mvn archetype:generate -DgroupId=dev.example.yuriiu -DartifactId=sayhelloLambda -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=true

@@ -4,3 +4,6 @@
 /06_mockito_demo/.mvn
 /16_sam_lambda/com.home.sam.test/target
 /16_sam_lambda/com.home.sam.test/.aws-sam
+/17_annotations/com.example.annotation-processor/target
+/17_annotations/com.example.annotation-user/generated-sources
+/18_alexaSkillHelloWorld/sayhelloLambda/target
